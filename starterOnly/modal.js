@@ -114,7 +114,7 @@ const validationForm = () =>{
    errors++;
   }
 
-  if(locationIsValid){
+  if(locationIsValid == false){
    error(locations[0],"Veuillez choisir une ville");
    errors++;
   }
@@ -143,12 +143,13 @@ const success= () => {
   successBtnClose.style.display= "block"; //appear btn close
   successMsg.style.display= "block"; //appear succes msg
   successBtnClose.addEventListener("click", closeModal); // on click close 
+
 }
 
 //collect data
 
 const submitForm = () =>{
-  let formData =  new formData(); //create a new form to collect data
+  let formData =  new FormData(); //create a new form to collect data
 
   formData.append("firstName", firstName.value);
   formData.append("lastName", lastName.value);
@@ -158,22 +159,24 @@ const submitForm = () =>{
 
   //request Ajax
 
-  let request = new XMLHttpRequest();
-  request.open("POST", "http://url-service-web.com/api/users");
+ /* let request = new XMLHttpRequest();
+  request.open("POST", "#link");
   request.send("formData");
 
   request.onreadystatechange = function() {
     if (this.readyState == XMLHttpRequest.DONE && this.status == 200) {
       success();
     }
-  };
+  }; */
 
 }
+
+//submit
 
 submitBtn.addEventListener("click", function(event){
   let isFormValid = validationForm();
   if(isFormValid){
-    submitForm();
+    submitForm(), success(); //submit + succes msg
   }
 });
 
